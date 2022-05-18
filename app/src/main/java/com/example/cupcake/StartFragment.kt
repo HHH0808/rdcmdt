@@ -77,9 +77,8 @@ class StartFragment : Fragment() {
         GlobalScope.launch {
             withContext(Dispatchers.Main) {
                 sharedViewModel.setLoginResult(API.loginUser(loginbody).body())
-                sharedViewModel.setHeader(sharedViewModel.sharedLoginResult.token)
-                sharedViewModel.setBalanceResult(API.getBalance(headers = sharedViewModel.sharedLoginResult.token.toString()).body())
-                sharedViewModel.setTransactionResult(API.getTransactions().body())
+                sharedViewModel.setBalanceResult(API.getBalance(Authorization = sharedViewModel.sharedLoginResult.token.toString()).body())
+                sharedViewModel.setTransactionResult(API.getTransactions(Authorization = sharedViewModel.sharedLoginResult.token.toString()).body())
                 //Log.d("OCBC: ", sharedViewModel.sharedLoginResult.toString())
                 //Log.d("OCBC: ", sharedViewModel.sharedBalanceResult.toString())
                 //Log.d("OCBC: ", sharedViewModel.sharedTransactionResult.toString())

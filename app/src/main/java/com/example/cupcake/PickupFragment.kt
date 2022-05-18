@@ -114,9 +114,9 @@ class PickupFragment : Fragment() {
 
         GlobalScope.launch {
             withContext(Dispatchers.Main) {
-                sharedViewModel.setTransferResult(API.transferFunds(transferBody).body())
+                sharedViewModel.setTransferResult(API.transferFunds(transferBody, Authorization = sharedViewModel.sharedLoginResult.token.toString()).body())
                 //Log.d("OCBC: ", sharedViewModel.sharedTransferResult.toString())
-                sharedViewModel.setTransactionResult(API.getTransactions().body())
+                sharedViewModel.setTransactionResult(API.getTransactions(Authorization = sharedViewModel.sharedLoginResult.token.toString()).body())
                 findNavController().navigate(R.id.action_pickupFragment_to_flavorFragment)
                 Toast.makeText(activity, "Transferred", Toast.LENGTH_SHORT).show()
 

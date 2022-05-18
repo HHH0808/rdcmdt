@@ -59,7 +59,7 @@ class FlavorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val recyclerview = view.findViewById<RecyclerView>(R.id.transactionContent)
         val data = mutableListOf<TransactionData>()
-        //Log.d("OCBC: ", sharedViewModel.sharedTransactionResult.data.toString())
+        Log.d("OCBC: ", sharedViewModel.sharedTransactionResult.data.toString())
         for (i in 0..1) {
             data.add(
                 TransactionData(
@@ -92,7 +92,7 @@ class FlavorFragment : Fragment() {
         // launching a new coroutine
         GlobalScope.launch {
             withContext(Dispatchers.Main){
-                sharedViewModel.setPayeeResult(API.getPayee().body())
+                sharedViewModel.setPayeeResult(API.getPayee(Authorization = sharedViewModel.sharedLoginResult.token.toString()).body())
                 //Log.d("OCBC: ", sharedViewModel.sharedPayeeResult.toString())
                 findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
             }
